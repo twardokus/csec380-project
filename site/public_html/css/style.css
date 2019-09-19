@@ -1,3 +1,4 @@
+/* Copyright (c) 2019 Andrew Afonso, just leave my name in comments if you reuse */
 html, body {
 	height: 100%;
 	margin: 0;
@@ -299,6 +300,16 @@ footer {
 	}
 	#smallWrapContent {
 		padding-bottom: 50px;
+	}
+	.scenario {
+		margin-left: 30px;
+		margin-right: 30px;
+	}
+	.scorelogo {
+		height: 50px;
+	}
+	#answerfield {
+		width: 60%;
 	}
 }
 
