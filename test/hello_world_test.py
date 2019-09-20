@@ -3,7 +3,7 @@
 from bs4 import BeautifulSoup
 import requests
 
-page = requests.get("http://localhost/index.php")
+page = requests.get("http://localhost/")
 
 content = page.content
 
