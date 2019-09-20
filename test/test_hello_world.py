@@ -8,7 +8,7 @@ def get_test_page():
 
     content = page.content
 
-    soup = BeautifulSoup(content)
+    soup = BeautifulSoup(content, "html.parser")
 
     target = soup.find_all("p")
     
