@@ -11,4 +11,4 @@ soup = BeautifulSoup(content)
 
 target = soup.find_all("p")
 
-assert(target[0].contents == "Hello World")
+assert(target[0].contents[0] == "Hello World")
