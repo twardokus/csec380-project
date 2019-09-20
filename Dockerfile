@@ -1,4 +1,4 @@
 FROM httpd:latest
 
-COPY ./site/public_html /var/www/html/
+COPY ./test/index.html /usr/local/apache2/htdocs/
 
