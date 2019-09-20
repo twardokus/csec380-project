@@ -1,0 +1,10 @@
+language: python
+
+services:
+    - docker
+    
+
+before_install:
+    - docker build ../docker/ -t webserver
+    - docker run -dit -p 80:80 webserver --name test-webserver
+    
