@@ -4,11 +4,11 @@ services:
     - docker
     
 before_install:
-    - docker build ./docker/ -t apachetest
+    - docker build ./ -t apachetest
     - docker run -dit -p 80:80 apachetest --name test-webserver
     
 install:
     - pip install -r ./test/requirements.txt
     
 script:
-    pytest
+    pytest --rootdir=./test
