@@ -1,6 +1,7 @@
 # Basic unit test for the Hello World webpage
 
 from bs4 import BeautifulSoup
+import requests
 
 page = requests.get("http://localhost/index.php")
 
