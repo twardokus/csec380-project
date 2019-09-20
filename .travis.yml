@@ -5,7 +5,7 @@ services:
     
 before_install:
     - docker build ./ -t apachetest
-    - docker run -dit -p 80:80 apachetest --name test-webserver
+    - docker run -dit -p 80:80 --name test-webserver apachetest
     
 install:
     - pip install -r ./test/requirements.txt
