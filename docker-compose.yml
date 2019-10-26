@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+   mysql:
+      restart: always
+      image: mysql:latest
+      environment:
+         MYSQL_ROOT_PASSWORD: 'password'
+         MYSQL_USER: 'testuser'
+         MYSQL_PASS: 'password'
+      ports:
+         - 3306:3306
+      volumes:
+         - mysql-data:/var/lib/mysql
+   server:
+      image: php:7.3-apache
+      ports:
+         - 80:80
+      volumes:
+         - ./html:/var/www/html
+
+
+volumes:
+   mysql-data:
+   
