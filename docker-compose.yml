@@ -11,15 +11,10 @@ services:
       ports:
          - 3306:3306
       volumes:
-         - mysql-data:/var/lib/mysql
+         - ./dbdata:/var/lib/mysql
    server:
       image: php:7.3-apache
       ports:
          - 80:80
       volumes:
          - ./html:/var/www/html
-
-
-volumes:
-   mysql-data:
-   
