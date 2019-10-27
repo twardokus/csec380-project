@@ -4,7 +4,7 @@
 	mysql_connect($config['serverread'], $config['usernameread'], $config['passwordread']) or DIE('Unable to connect to NAS, check if SQL server is enabled');
 	mysql_select_db($config['dbnameread']) or DIE('Database is not available!');
 	// query DB for username and password entery given by input. Note output from MD5 function passed as password:
-	$login = mysql_query("SELECT * FROM users WHERE (username = '" . mysql_real_escape_string($_POST['username']) . "') and (userpass = '" . mysql_real_escape_string(md5($_POST['password'])) . "')");
+	$login = mysql_query("SELECT * FROM users WHERE (email = '" . mysql_real_escape_string($_POST['username']) . "') and (password = '" . mysql_real_escape_string(md5($_POST['password'])) . "')");
 	// Check username and password match
 	if (mysql_num_rows($login) == 1) {
 		// Set username session variable
