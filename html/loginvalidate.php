@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	$config = parse_ini_file($_SERVER["DOCUMENT_ROOT"]."/../private/config.ini"); 	
+	$config = parse_ini_file($_SERVER["DOCUMENT_ROOT"]."/tempvuln/config.ini"); 	
 	mysql_connect($config['serverread'], $config['usernameread'], $config['passwordread']) or DIE('Unable to connect to NAS, check if SQL server is enabled');
 	mysql_select_db($config['dbnameread']) or DIE('Database is not available!');
 	// query DB for username and password entery given by input. Note output from MD5 function passed as password:
