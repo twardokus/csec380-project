@@ -5,16 +5,15 @@ services:
       restart: always 
       build: ./db
       environment:
-         MYSQL_DATABASE: 'csecfinal'
-         MYSQL_ROOT_PASSWORD: 'password'
-         MYSQL_USER: 'testuser'
-         MYSQL_PASS: 'password'
+         - MYSQL_ROOT_PASSWORD=password
+         - MYSQL_USER=testuser
+         - MYSQL_PASS=password
       ports:
          - 3306:3306
 #      volumes:
 #         - ./dbdata:/docker-entrypoint-initdb.d
    server:
-      image: php:7.3-apache
+      build: ./apache
       ports:
          - 80:80
       volumes:
