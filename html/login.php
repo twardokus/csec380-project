@@ -1,9 +1,6 @@
 <?php
 	// Inialize session
 	session_start();
-	if (isset($_SESSION['username'])){
-		header('Location: videos.php');
-	}
 ?>
 <html>
 <head>
