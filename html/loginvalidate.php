@@ -1,18 +1,34 @@
 <?php
 	session_start();
-	$config = parse_ini_file($_SERVER["DOCUMENT_ROOT"]."/tempvuln/config.ini"); 	
-	mysql_connect($config['server'], $config['username'], $config['password']) or DIE('Unable to connect to NAS, check if SQL server is enabled');
-	mysql_select_db($config['dbname']) or DIE('Database is not available!');
-	// query DB for username and password entery given by input. Note output from MD5 function passed as password:
-	$login = mysql_query("SELECT * FROM users WHERE (email = '" . mysql_real_escape_string($_POST['username']) . "') and (password = '" . mysql_real_escape_string(md5($_POST['password'])) . "')");
-	// Check username and password match
-	if (mysql_num_rows($login) == 1) {
-		// Set username session variable
-		$_SESSION['username'] = $_POST['username'];
-		//Go to secured page
-		header('Location: videos.php');
-	}
- 
+	$config = parse_ini_file($_SERVER["DOCUMENT_ROOT"]."/tempvuln/config.ini");
+    $sqlconn = mysqli_connect($config['server'], $config['username'], $config['password'], $config['dbname']);
+    if ($sqlconn === false){
+        die('Connect fail ('. mysqli_connect_errno() .') '
+        . mysqli_connect_error());
+    }
+    if ($sqlconn->connect_error) {
+        die("connect error: ". $sqlconn->connect_error);
+    }
+    $stmt = mysqli_prepare($sqlconn, "SELECT password, user_id FROM users WHERE email=?");
+    mysqli_stmt_bind_param($stmt, 's', $_POST['username']);
+    if(!$stmt->execute()){
+        die("Error - Issue executing prepared statement: " . mysqli_error($sqlconn));
+    }
+    if($res = $stmt->get_result()){
+        $row = $res->fetch_assoc();
+        if(mysqli_num_rows($res) == 1) {
+            if($_POST['password'] === $row['password']){
+                session_destroy();
+                session_start();
+                // Set username session variable
+                $_SESSION['username'] = $_POST['username'];
+                //Go to secured page
+                header('Location: videos.php');
+            }
+        }
+    }else{
+        die("Error - Getting results: " . mysqli_error($sqlconn));
+    }
 ?>
 <html>
 	<head>
