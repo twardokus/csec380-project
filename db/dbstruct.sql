@@ -14,7 +14,7 @@ USE csecfinal;
 CREATE TABLE IF NOT EXISTS `users` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(64) NOT NULL,
-  `password` varchar(64) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `firstname` varchar(25) NOT NULL,
   `lastname` varchar(25) NOT NULL,
   PRIMARY KEY (`user_id`)
@@ -25,6 +25,6 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`user_id`, `email`, `password`, `firstname`, `lastname`) VALUES
-(1, 'admin@rit.edu', 'password', 'Jon', 'Doe'),
-(2, 'nonadmin@rit.edu', 'password', 'neil', 'zimmerman'),
-(3, 'userone@rit.edu', 'password', 'Grant', 'Batchlor');
+(1, 'admin@rit.edu', md5('password'), 'Jon', 'Doe'),
+(2, 'nonadmin@rit.edu', md5('password'), 'neil', 'zimmerman'),
+(3, 'userone@rit.edu', md5('password'), 'Grant', 'Batchlor');
