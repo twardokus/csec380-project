@@ -17,7 +17,7 @@
     if($res = $stmt->get_result()){
         $row = $res->fetch_assoc();
         if(mysqli_num_rows($res) == 1) {
-            if($_POST['password'] === $row['password']){
+            if(md5($_POST['password']) === $row['password']){
                 session_destroy();
                 session_start();
                 // Set username session variable
