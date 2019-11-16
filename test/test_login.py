@@ -2,6 +2,7 @@
 
 from bs4 import BeautifulSoup
 import requests
+import time
 
 """
 def get_test_page():
@@ -39,9 +40,10 @@ def wait_for_docker_compose():
 	while failures < 10:
 		try:
 			home = requests.get("http://localhost")
+			break
 		except:
 			failures += 1
-			sleep(30)	
+			time.sleep(30)	
 
 
 def test_connection():
