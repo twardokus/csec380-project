@@ -45,7 +45,7 @@ def wait_for_docker_compose():
 
 
 def test_connection():
-	home = requests.get("http://localhost")
+	home = requests.get("http://127.0.0.1:80")
 	assert(home != None)
 
 
