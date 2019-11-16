@@ -40,10 +40,10 @@ CREATE TABLE `videos` (
   `ownerid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `videos` (`video_id`, `title`, `titlehash`, `timestamp`, `ownerid`) VALUES
-(1, 'admin@rit.edu', md5('password'), 'Jon', 'Doe'),
-(2, 'nonadmin@rit.edu', md5('password'), 'neil', 'zimmerman'),
-(3, 'userone@rit.edu', md5('password'), 'Grant', 'Batchlor');
+-- INSERT INTO `videos` (`video_id`, `title`, `titlehash`, `timestamp`, `ownerid`) VALUES
+-- (1, 'admin@rit.edu', md5('password'), 'Jon', 'Doe'),
+-- (2, 'nonadmin@rit.edu', md5('password'), 'neil', 'zimmerman'),
+-- (3, 'userone@rit.edu', md5('password'), 'Grant', 'Batchlor');
 
 --
 -- Indexes for dumped tables
