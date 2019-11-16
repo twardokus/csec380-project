@@ -5,21 +5,6 @@ import requests
 import time
 
 
-def get_test_page():
-    page = requests.get("http://localhost/")
-
-    content = page.content
-
-    soup = BeautifulSoup(content, "html.parser")
-
-    target = soup.find_all("p")
-    
-    return target[0].contents[0]
-
-def test_get_test_page():
-    assert(get_test_page()== "Hello World")
-
-
 def login():
 	url = "http://localhost/loginvalidate.php"	
 	validCreds = {'username':'admin@rit.edu','password':'password'}
