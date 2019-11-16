@@ -22,4 +22,4 @@
         die("Error - Getting results: " . mysqli_error($sqlconn));
     }
 ?>
-<meta http-equiv=\"Refresh\" content=\"3; url=http://localhost/login.php" />
+<meta http-equiv=\"Refresh\" content=\"0; url=http://localhost/login.php" />
