@@ -1,16 +1,97 @@
 <?php
-    require_once('writerObj.php');
-    if(!isset($_SESSION['username']) or ){
+$uploaded = 0;
+$date = date("Y-m-d");
+$vidtitle = filter_input(INPUT_POST, 'vidtitle');
+require_once('writerObj.php');
+if(isset($_SESSION['username'])){
+    try {
+        // Undefined | Multiple Files | $_FILES Corruption Attack
+        // If this request falls under any of them, treat it invalid.
+        if(!isset($_FILES['upfile']['error']) || is_array($_FILES['upfile']['error'])){
+            throw new RuntimeException('Invalid parameters.');
+        }
         
-    }
-    else{
-        die("There was an issue contact your administrator");
+        // Check $_FILES['upfile']['error'] value.
+        switch ($_FILES['upfile']['error']) {
+            case UPLOAD_ERR_OK:
+                break;
+            case UPLOAD_ERR_NO_FILE:
+                throw new RuntimeException('No file sent.');
+            case UPLOAD_ERR_INI_SIZE:
+            case UPLOAD_ERR_FORM_SIZE:
+                throw new RuntimeException('Exceeded filesize limit.');
+            default:
+                throw new RuntimeException('Unknown errors.');
+        }
+
+        // Again checking file size
+        if ($_FILES['upfile']['size'] > 10000000) {
+            throw new RuntimeException('Exceeded filesize limit (10mb).');
+        }
+
+        // DO NOT TRUST $_FILES['upfile']['mime'] VALUE !!
+        // Check MIME Type by yourself.
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
+        if (false === $ext = array_search(
+            $finfo->file($_FILES['upfile']['tmp_name']),
+            array(
+                'mp4' => 'video/mp4',
+            ),
+            true
+        )) {
+            throw new RuntimeException('Invalid file format.');
+        }
+
+        $filename = sprintf('%s.%s', sha1_file($_FILES['upfile']['tmp_name']),$ext);
+        $getuid = "SELECT user_id FROM users WHERE email='".$_SESSION['username']."';";
+        $uid = $sqlconn->query($getuid);
+        $path = $_SERVER["DOCUMENT_ROOT"]. "/videos/" . $uid ."/";
+        if (is_dir($path) == false){
+            mkdir($path);
+        }
+        #echo "Info ". $filename;
+        $datastorage = $path . $filename;
+        //if (file_exists ( $datastorage) == true){
+        //    echo('');
+        //}
+        #echo "Info ". $datastorage;
+        // You should name it uniquely.
+        // DO NOT USE $_FILES['upfile']['name'] WITHOUT ANY VALIDATION !!
+        // On this example, obtain safe unique name from its binary data.
+        if (!move_uploaded_file(
+            $_FILES['upfile']['tmp_name'],
+            "$datastorage"
+        )) {
+            throw new RuntimeException('Failed to move uploaded file.');
+        }
+        $uploaded=1;
+        
+        // Remove, this will be bad
+        echo 'File: '. $_FILES['upfile']['name'] .' is uploaded successfully.';
+    } catch (RuntimeException $e) {
+        echo $e->getMessage();
     }
 
-    $uname = filter_input(INPUT_POST, 'uname');
-    $passcode = filter_input(INPUT_POST, 'weekpasswd');
-    $fname =  $_FILES['upfile']['name'];
-    $date = date("Y-m-d");
-    $sqlconn;
-
+    if($uploaded == 1){
+        $filecheck = "SELECT titlehash FROM videos WHERE titlehash='$filename';";
+        $checked=$writeconn->query($filecheck);
+        $again = mysqli_fetch_assoc($checked);
+        #echo "THIS: ". $again['uniquefn'];
+        #echo "THIS AGAIN: ". strcmp($again['uniquefn'], $filename);
+        if(strcmp($again['titlehash'], $filename) != 0){
+            $sqlfile = "INSERT INTO videos (ownerid, title, titlehash, timestamp) VALUES ('$uid', '$vidtitle', '$filename', '$date')";
+            if ($writeconn->query($sqlfile)){
+                echo " File data uploaded to DB sucessfully";
+//                echo "<meta http-equiv=\"Refresh\" content=\"3; url=https://nexthop.network/tracking\">";
+            }
+            else{
+                echo "Error: ". $sqlfile ."
+                ". $writeconn->error."";
+            }
+        }
+    }
+}
+else {
+    echo "Bad session";
+}
 ?>
