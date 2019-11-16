@@ -15,24 +15,24 @@ def test_login():
 	
 	# Test valid credentials
 	
-	loginResponse = login('admin%40rit.edu','password')
+	loginResponse = login('admin@rit.edu','password')
 	
 	assert(loginResponse.status_code == 200)
 	assert(loginResponse.url == "http://localhost/videos.php")
 
 	# Test bad username and good password
 
-	loginReponse = login('admin%40rit.edu','badpassword')
+	loginReponse = login('notarealuser','badpassword')
 	
 	assert(loginResponse.status_code == 200)
-	assert(loginResponse.url == "http://localhost/login.php")
-
+	assert("Set-Cookie" not in loginResponse.headers)
+		
 	# Test good username and bad password
 
-	loginResponse = login('admin%40rit.edu','password')
-	
+	loginResponse = login('admin@rit.edu','badpassword')
+
 	assert(loginResponse.status_code == 200)
-	assert(loginResponse.url == "http://localhost/login.php")
+	assert("Set-Cookie" not in loginResponse.headers)
 
 
 def wait_for_docker_compose():

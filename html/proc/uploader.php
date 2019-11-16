@@ -6,10 +6,15 @@ $vidtitle = filter_input(INPUT_POST, 'vidtitle');
 require_once('writerObj.php');
 //echo var_dump($_SESSION);
 if(isset($_SESSION['username'])){
-    if(isset($_FILES['upfile']) && $_FILES['upfile']['size'] > 0 && isset($_POST['downloadurl'])){
+    if(isset($_FILES['upfile']) && $_FILES['upfile']['size'] > 0 && isset($_POST['downloadurl']) && strlen($_POST['downloadurl']) > 0){
         die("Choose one please <meta http-equiv=\"Refresh\" content=\"2; url=/videoupload.php\">");
     }
-    if(isset($_FILES['upfile'])){
+    $getuid = "SELECT user_id FROM users WHERE email='".$_SESSION['username']."';";
+    $uidreturned = $sqlconn->query($getuid);
+    $uidinfo = mysqli_fetch_assoc($uidreturned);
+    $uid = $uidinfo['user_id'];
+    $path = $_SERVER["DOCUMENT_ROOT"]. "/videos/" . $uid ."/";
+    if(isset($_FILES['upfile']) && $_FILES['upfile']['size'] > 0){
         try {
             // Undefined | Multiple Files | $_FILES Corruption Attack
             // If this request falls under any of them, treat it invalid.
@@ -49,11 +54,6 @@ if(isset($_SESSION['username'])){
             }
 
             $filename = sprintf('%s.%s', sha1_file($_FILES['upfile']['tmp_name']),$ext);
-            $getuid = "SELECT user_id FROM users WHERE email='".$_SESSION['username']."';";
-            $uidreturned = $sqlconn->query($getuid);
-            $uidinfo = mysqli_fetch_assoc($uidreturned);
-            $uid = $uidinfo['user_id'];
-            $path = $_SERVER["DOCUMENT_ROOT"]. "/videos/" . $uid ."/";
             if(is_dir($path) == false){
                 mkdir($path);
             }
@@ -75,33 +75,45 @@ if(isset($_SESSION['username'])){
             $uploaded=1;
             
             // Remove, this will be bad
-            echo 'File: '. $_FILES['upfile']['name'] .' is uploaded successfully.';
+//            echo 'File: '. $_FILES['upfile']['name'] .' is uploaded successfully.';
         } catch (RuntimeException $e) {
             echo $e->getMessage();
         }
 
-        if($uploaded == 1){
-            $filecheck = "SELECT titlehash FROM videos WHERE titlehash='$filename';";
-            $checked=$sqlconn->query($filecheck);
-            $again = mysqli_fetch_assoc($checked);
-            #echo "THIS: ". $again['uniquefn'];
-            #echo "THIS AGAIN: ". strcmp($again['uniquefn'], $filename);
-            if(strcmp($again['titlehash'], $filename) != 0){
-                $sqlfile = "INSERT INTO videos (ownerid, title, titlehash, timestamp) VALUES ('$uid', '$vidtitle', '$filename', '$date')";
-                if ($sqlconn->query($sqlfile)){
-                    echo " File data uploaded to DB sucessfully";
-    //                echo "<meta http-equiv=\"Refresh\" content=\"3; url=https://nexthop.network/tracking\">";
-                }
-                else{
-                    echo "Error: ". $sqlfile ."
-                    ". $writeconn->error."";
-                }
+    }
+    if(isset($_POST['downloadurl']) && strlen($_POST['downloadurl']) > 0){
+        $filevURL = file_get_contents($_POST['downloadurl']);
+        $upfileinfo = pathinfo($_POST['downloadurl']);
+        //print_r( pathinfo($_POST['downloadurl']));
+        if($upfileinfo['extension'] != 'mp4'){
+            die("Must upload mp4 video. <meta http-equiv=\"Refresh\" content=\"2; url=/videoupload.php\">");
+        }
+        $filename = sprintf('%s.%s', sha1_file($_POST['downloadurl']),$upfileinfo['extension']);
+        if(is_dir($path) == false){
+            mkdir($path);
+        }
+        $datastorage = $path . $filename;
+        if (!file_put_contents($datastorage, $filevURL)) {
+            throw new RuntimeException('Failed to move file uploaded via URL.');
+        }
+        $uploaded=1;
+    }
+    if($uploaded == 1){
+        $filecheck = "SELECT titlehash FROM videos WHERE titlehash='$filename';";
+        $checked=$sqlconn->query($filecheck);
+        $again = mysqli_fetch_assoc($checked);
+        #echo "THIS: ". $again['uniquefn'];
+        #echo "THIS AGAIN: ". strcmp($again['uniquefn'], $filename);
+        if(strcmp($again['titlehash'], $filename) != 0){
+            $sqlfile = "INSERT INTO videos (ownerid, title, titlehash, timestamp) VALUES ('$uid', '$vidtitle', '$filename', '$date')";
+            if ($sqlconn->query($sqlfile)){
+                echo " File data uploaded to DB sucessfully. <meta http-equiv=\"Refresh\" content=\"2; url=/videoupload.php\">";
+            }
+            else{
+                echo "Error: ". $sqlfile ."
+                ". $writeconn->error."";
             }
         }
-    }
-    if(isset($_POST['downloadurl'])){
-        $filevURL = file($_POST['downloadurl']);
-        echo $filevURL['tmp_name'];
     }
 }
 else {
