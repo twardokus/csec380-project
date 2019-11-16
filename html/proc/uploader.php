@@ -1,8 +1,10 @@
 <?php
+session_start();
 $uploaded = 0;
 $date = date("Y-m-d");
 $vidtitle = filter_input(INPUT_POST, 'vidtitle');
 require_once('writerObj.php');
+//echo var_dump($_SESSION);
 if(isset($_SESSION['username'])){
     try {
         // Undefined | Multiple Files | $_FILES Corruption Attack
@@ -44,9 +46,11 @@ if(isset($_SESSION['username'])){
 
         $filename = sprintf('%s.%s', sha1_file($_FILES['upfile']['tmp_name']),$ext);
         $getuid = "SELECT user_id FROM users WHERE email='".$_SESSION['username']."';";
-        $uid = $sqlconn->query($getuid);
+        $uidreturned = $sqlconn->query($getuid);
+        $uidinfo = mysqli_fetch_assoc($uidreturned);
+        $uid = $uidinfo['user_id'];
         $path = $_SERVER["DOCUMENT_ROOT"]. "/videos/" . $uid ."/";
-        if (is_dir($path) == false){
+        if(is_dir($path) == false){
             mkdir($path);
         }
         #echo "Info ". $filename;
