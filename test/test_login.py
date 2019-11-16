@@ -17,7 +17,7 @@ def get_test_page():
 
 def test_get_test_page():
     assert(get_test_page()== "Hello World")
-"""
+
 
 def login():
 	url = "http://localhost/loginvalidate.php"	
@@ -31,4 +31,8 @@ def test_login():
 	assert(loginResponse.status_code == 302)
 	assert(loginResponse.headers["Location"]) == "videos.php"
 
-test_login()
+#test_login()
+
+def test_connection():
+	home = requests.get("http://localhost")
+	assert(home != None)
