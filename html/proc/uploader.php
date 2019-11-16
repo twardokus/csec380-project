@@ -78,13 +78,13 @@ if(isset($_SESSION['username'])){
 
     if($uploaded == 1){
         $filecheck = "SELECT titlehash FROM videos WHERE titlehash='$filename';";
-        $checked=$writeconn->query($filecheck);
+        $checked=$sqlconn->query($filecheck);
         $again = mysqli_fetch_assoc($checked);
         #echo "THIS: ". $again['uniquefn'];
         #echo "THIS AGAIN: ". strcmp($again['uniquefn'], $filename);
         if(strcmp($again['titlehash'], $filename) != 0){
             $sqlfile = "INSERT INTO videos (ownerid, title, titlehash, timestamp) VALUES ('$uid', '$vidtitle', '$filename', '$date')";
-            if ($writeconn->query($sqlfile)){
+            if ($sqlconn->query($sqlfile)){
                 echo " File data uploaded to DB sucessfully";
 //                echo "<meta http-equiv=\"Refresh\" content=\"3; url=https://nexthop.network/tracking\">";
             }
