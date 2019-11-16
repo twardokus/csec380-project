@@ -33,7 +33,7 @@ def test_connection():
 	assert(home != None)
 
 
-#wait_for_docker_compose()
-#test_connection()
+wait_for_docker_compose()
+test_connection()
 test_login()
 
