@@ -7,7 +7,7 @@ import time
 def login():
 	url = "http://localhost/loginvalidate.php"	
 	validCreds = {'username':'admin@rit.edu','password':'password'}
-	result = requests.post(url, validCreds)
+	result = requests.post(url, validCreds, allow_redirects=True)
 
 	return result
 
@@ -21,7 +21,7 @@ def wait_for_docker_compose():
 	failures = 0
 	while failures < 10:
 		try:
-			home = requests.get("http://localhost")
+			home = requests.get("http://localhost", allow_redirects=True)
 			break
 		except:
 			failures += 1
@@ -29,7 +29,7 @@ def wait_for_docker_compose():
 
 
 def test_connection():
-	home = requests.get("http://127.0.0.1:80")
+	home = requests.get("http://127.0.0.1:80", allow_redirects=True)
 	assert(home != None)
 
 

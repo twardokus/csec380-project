@@ -11,7 +11,7 @@
 		<?php include("proc/head.php"); ?>
 	</head>
 	<body>
-	<?php $headtext = "<h1>Video Uploader</h1>"; include("proc/header.php"); ?>
+	<?php $headtext = "<h1>Video Uploader</h1>"; include("proc/header.php");  ?>
 	
 	<div class="vcenter text">
 		<div class="vcenterholder center">
