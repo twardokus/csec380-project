@@ -16,7 +16,7 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `firstname` varchar(25) NOT NULL,
   `lastname` varchar(25) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
@@ -79,7 +79,7 @@ ALTER TABLE `videos`
   MODIFY `video_id` int(11) NOT NULL AUTO_INCREMENT;
   
 --
--- Constraints for table `users`
+-- Constraints for table `videos`
 --
 ALTER TABLE `videos`
   ADD CONSTRAINT `owner_id_fk` FOREIGN KEY (`ownerid`) REFERENCES `users` (`user_id`);
