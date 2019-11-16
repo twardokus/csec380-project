@@ -38,3 +38,11 @@ CREATE TABLE IF NOT EXISTS 'videos' (
     'ownerid' int(11) NOT NULL,
     PRIMARY KEY ('video_id')
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=5;
+
+INSERT INTO `videos` (`video_id`, `title`, `titlehash`, `timestamp`,`ownerid`) VALUES (
+	1,
+	'Hello!',
+	md5('Hello!'),
+	'today',
+	2
+);
