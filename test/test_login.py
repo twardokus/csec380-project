@@ -4,7 +4,6 @@ from bs4 import BeautifulSoup
 import requests
 import time
 
-
 def login():
 	url = "http://localhost/loginvalidate.php"	
 	validCreds = {'username':'admin@rit.edu','password':'password'}
@@ -14,10 +13,13 @@ def login():
 
 def test_login():
 	loginResponse = login()
+	print(loginResponse.url)
+	print(loginResponse.statusCode)
+	print(loginResponse.headers)
+	
 	assert(loginResponse.status_code == 302)
 	assert(loginResponse.headers["Location"]) == "videos.php"
-
-
+	#assert(loginResponse.url == "http://localhost/videos.php")
 
 def wait_for_docker_compose():
 	failures = 0
