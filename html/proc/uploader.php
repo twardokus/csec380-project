@@ -6,10 +6,9 @@ $vidtitle = filter_input(INPUT_POST, 'vidtitle');
 require_once('writerObj.php');
 //echo var_dump($_SESSION);
 if(isset($_SESSION['username'])){
-    if(isset($_FILES['upfile']) && isset($_POST['downloadurl'])){
+    if(isset($_FILES['upfile']) && $_FILES['upfile']['size'] > 0 && isset($_POST['downloadurl'])){
         die("Choose one please <meta http-equiv=\"Refresh\" content=\"2; url=/videoupload.php\">");
     }
-    
     if(isset($_FILES['upfile'])){
         try {
             // Undefined | Multiple Files | $_FILES Corruption Attack
@@ -99,6 +98,9 @@ if(isset($_SESSION['username'])){
                 }
             }
         }
+    }
+    if(isset($_POST['downloadurl'])){
+//        echo file_get_contents($_POST['downloadurl']);
     }
 }
 else {
