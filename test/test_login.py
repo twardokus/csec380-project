@@ -13,6 +13,10 @@ def login():
 
 def test_login():
 	loginResponse = login()
+	print(loginResponse.url)
+	print(loginResponse.statusCode)
+	print(loginResponse.headers)
+	
 	assert(loginResponse.status_code == 302)
 	assert(loginResponse.headers["Location"]) == "videos.php"
 	#assert(loginResponse.url == "http://localhost/videos.php")
