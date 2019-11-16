@@ -22,7 +22,7 @@ def test_get_test_page():
 
 def login():
 	url = "http://localhost/loginvalidate.php"	
-	validCreds = {'username':'admin%40rit.edu','password':'password'}
+	validCreds = {'username':'admin@rit.edu','password':'password'}
 	result = requests.post(url, validCreds, allow_redirects=True)
 
 	return result
