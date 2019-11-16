@@ -24,7 +24,8 @@
                 <br>
                 Enter URL of video to download:
                 <input type="text" name="downloadurl" id="downloadurl">
-				<input type="submit" value="Upload File" name="submit">
+                <br>
+				<input type="submit" value="Submit Video" name="submit">
 			</form>
 		</div>
 	</div>
