@@ -34,8 +34,20 @@ def test_login():
 #test_login()
 """
 
+def wait_for_docker_compose():
+	failures = 0
+	while failures < 10:
+	try:
+		home = requests.get("http://localhost")
+	except:
+		failures += 1
+		sleep(30)	
+
+
 def test_connection():
 	home = requests.get("http://localhost")
 	assert(home != None)
 
+
+wait_for_docker_compose()
 test_connection()
