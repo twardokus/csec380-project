@@ -17,9 +17,10 @@ def test_login():
 	print(loginResponse.status_code)
 	print(loginResponse.headers)
 	
-	assert(loginResponse.status_code == 302)
-	assert(loginResponse.headers["Location"]) == "videos.php"
-	#assert(loginResponse.url == "http://localhost/videos.php")
+	#assert(loginResponse.status_code == 302)
+	#assert(loginResponse.headers["Location"]) == "videos.php"
+	assert(loginResponse.status_code == 200)
+	assert(loginResponse.url == "http://localhost/videos.php")
 
 def wait_for_docker_compose():
 	failures = 0
