@@ -14,7 +14,7 @@ def login():
 def test_login():
 	loginResponse = login()
 	print(loginResponse.url)
-	print(loginResponse.statusCode)
+	print(loginResponse.status_code)
 	print(loginResponse.headers)
 	
 	assert(loginResponse.status_code == 302)
