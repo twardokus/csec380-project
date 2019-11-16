@@ -13,6 +13,11 @@
 		<div class="vcenterholder center">
 			<h1>Login</h1>
 			<form method="POST" action="loginvalidate.php">
+				<?php
+                                	require_once('recaptchalib.php');
+	                                $publickey = "6Le_F8MUAAAAAIZmG1GQ9zssJsOY4764WEs93P4H"; // you got this from the signup page
+        	                        echo recaptcha_get_html($publickey);
+                                >?
 				<p>Username: <input id="softfield" type="text" name="username" size="20"><br>
 				Password: <input id="softfield" type="password" name="password" size="20"><br>
 				(Cookies in use) <br>
