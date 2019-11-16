@@ -52,7 +52,7 @@ def test_connection():
 	home = requests.get("http://127.0.0.1:80", allow_redirects=True)
 	assert(home != None)
 
-#wait_for_docker_compose()
+wait_for_docker_compose()
 test_connection()
 test_login()
 
