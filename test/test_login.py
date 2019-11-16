@@ -4,23 +4,36 @@ from bs4 import BeautifulSoup
 import requests
 import time
 
-def login():
+def login(username, password):
 	url = "http://localhost/loginvalidate.php"	
-	validCreds = {'username':'admin@rit.edu','password':'password'}
+	validCreds = {'username': username,'password': password}
 	result = requests.post(url, validCreds, allow_redirects=True)
 
 	return result
 
 def test_login():
-	loginResponse = login()
-	print(loginResponse.url)
-	print(loginResponse.status_code)
-	print(loginResponse.headers)
 	
-	#assert(loginResponse.status_code == 302)
-	#assert(loginResponse.headers["Location"]) == "videos.php"
+	# Test valid credentials
+	
+	loginResponse = login('admin%40rit.edu','password')
+	
 	assert(loginResponse.status_code == 200)
 	assert(loginResponse.url == "http://localhost/videos.php")
+
+	# Test bad username and good password
+
+	loginReponse = login('admin%40rit.edu','badpassword')
+	
+	assert(loginResponse.status_code == 200)
+	assert(loginResponse.url == "http://localhost/login.php")
+
+	# Test good username and bad password
+
+	loginResponse = login('admin%40rit.edu','password')
+	
+	assert(loginResponse.status_code == 200)
+	assert(loginResponse.url == "http://localhost/login.php")
+
 
 def wait_for_docker_compose():
 	failures = 0
@@ -32,11 +45,9 @@ def wait_for_docker_compose():
 			failures += 1
 			time.sleep(30)	
 
-
 def test_connection():
 	home = requests.get("http://127.0.0.1:80", allow_redirects=True)
 	assert(home != None)
-
 
 wait_for_docker_compose()
 test_connection()
