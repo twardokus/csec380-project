@@ -29,4 +29,6 @@ def login():
 def test_login():
 	loginResponse = login()
 	assert(loginResponse.status_code == 302)
-	assert(loginResponse.headers["Location"] == "videos.php"
+	assert(loginResponse.headers["Location"]) == "videos.php"
+
+test_login()
