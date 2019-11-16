@@ -4,6 +4,6 @@
     $passcode = filter_input(INPUT_POST, 'weekpasswd');
     $fname =  $_FILES['upfile']['name'];
     $date = date("Y-m-d");
-    
+    $sqlconn;
 
 ?>
