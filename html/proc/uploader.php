@@ -53,7 +53,7 @@ if(isset($_SESSION['username'])){
                 throw new RuntimeException('Invalid file format.');
             }
 
-            $filename = sprintf('%s.%s', sha1_file($_FILES['upfile']['tmp_name']),$ext);
+            $filename = sprintf('%s.%s', sha1(time()),$ext);
             if(is_dir($path) == false){
                 mkdir($path);
             }
@@ -88,7 +88,7 @@ if(isset($_SESSION['username'])){
         if($upfileinfo['extension'] != 'mp4'){
             die("Must upload mp4 video. <meta http-equiv=\"Refresh\" content=\"2; url=/videoupload.php\">");
         }
-        $filename = sprintf('%s.%s', sha1_file($_POST['downloadurl']),$upfileinfo['extension']);
+        $filename = sprintf('%s.%s', sha1(time()),$upfileinfo['extension']);
         if(is_dir($path) == false){
             mkdir($path);
         }
