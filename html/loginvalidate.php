@@ -22,15 +22,4 @@
         die("Error - Getting results: " . mysqli_error($sqlconn));
     }
 ?>
-<html>
-	<head>
-		<title>Bad Login</title>
-	</head>
-	<body>
-		<p>
-		Bad credentials!
-		</b>
-		<br>
-		Retry: <a href="login.php">login</a> </p>
-	</body>
-</html>
+<meta http-equiv="Refresh" content="0; url=http://localhost/login.php" />
