@@ -22,7 +22,7 @@
 				Select video file (mp4) to upload:
 				<input type="file" name="upfile" id="upfile">
                 <br>
-                Enter URL of video to download:
+                OR Enter URL of video to download:
                 <input type="text" name="downloadurl" id="downloadurl">
                 <br>
 				<input type="submit" value="Submit Video" name="submit">
