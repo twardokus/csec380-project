@@ -8,6 +8,7 @@ services:
          - MYSQL_ROOT_PASSWORD=password
          - MYSQL_USER=testuser
          - MYSQL_PASS=password
+         - MYSQL_HOST=localhost
       ports:
          - 3306:3306
 #      volumes:
