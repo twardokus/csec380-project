@@ -12,6 +12,8 @@ services:
          - 3306:3306
 #      volumes:
 #         - ./dbdata:/docker-entrypoint-initdb.d
+#         - ./db/data:/var/lib/mysql
+
    server:
       build: ./apache
       ports:
