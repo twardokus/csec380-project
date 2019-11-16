@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 import requests
 import time
 
-"""
+
 def get_test_page():
     page = requests.get("http://localhost/")
 
@@ -32,8 +32,7 @@ def test_login():
 	assert(loginResponse.status_code == 302)
 	assert(loginResponse.headers["Location"]) == "videos.php"
 
-#test_login()
-"""
+
 
 def wait_for_docker_compose():
 	failures = 0
@@ -53,3 +52,5 @@ def test_connection():
 
 wait_for_docker_compose()
 test_connection()
+test_login()
+
