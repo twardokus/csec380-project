@@ -28,3 +28,13 @@ INSERT INTO `users` (`user_id`, `email`, `password`, `firstname`, `lastname`) VA
 (1, 'admin@rit.edu', md5('password'), 'Jon', 'Doe'),
 (2, 'nonadmin@rit.edu', md5('password'), 'neil', 'zimmerman'),
 (3, 'userone@rit.edu', md5('password'), 'Grant', 'Batchlor');
+
+CREATE TABLE IF NOT EXISTS 'videos' (
+	'video_id' int(11) NOT NULL AUTO_INCREMENT,
+	'title' varchar(64) NOT NULL,
+	'titlehash' varchar(255) NOT NULL,
+	'timestamp' varchar(25) NOT NULL,
+	'ownerid' int(11) NOT NULL,
+	PRIMARY KEY ('video_id')
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=5;
+
