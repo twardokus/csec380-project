@@ -32,7 +32,10 @@ def test_login():
 	assert(loginResponse.headers["Location"]) == "videos.php"
 
 #test_login()
+"""
 
 def test_connection():
 	home = requests.get("http://localhost")
 	assert(home != None)
+
+test_connection()
