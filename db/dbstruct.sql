@@ -59,7 +59,8 @@ ALTER TABLE `users`
 -- Indexes for table `videos`
 --
 ALTER TABLE `videos`
-  ADD PRIMARY KEY (`video_id`);
+  ADD PRIMARY KEY (`video_id`),
+  ADD KEY `owner_id_fk` (`ownerid`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -76,4 +77,10 @@ ALTER TABLE `users`
 --
 ALTER TABLE `videos`
   MODIFY `video_id` int(11) NOT NULL AUTO_INCREMENT;
+  
+--
+-- Constraints for table `users`
+--
+ALTER TABLE `videos`
+  ADD CONSTRAINT `owner_id_fk` FOREIGN KEY (`ownerid`) REFERENCES `users` (`user_id`);
 COMMIT;
