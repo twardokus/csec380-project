@@ -100,7 +100,8 @@ if(isset($_SESSION['username'])){
         }
     }
     if(isset($_POST['downloadurl'])){
-//        echo file_get_contents($_POST['downloadurl']);
+        $filevURL = file($_POST['downloadurl']);
+        echo $filevURL['tmp_name'];
     }
 }
 else {
