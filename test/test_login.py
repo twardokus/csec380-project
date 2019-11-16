@@ -22,17 +22,14 @@ def test_login():
 
 	# Test bad username and good password
 
-	loginReponse = login('admin@rit.edu','badpassword')
+	loginReponse = login('notarealuser','badpassword')
 	
 	assert(loginResponse.status_code == 200)
 	assert("Set-Cookie" not in loginResponse.headers)
 		
-	#assert(loginResponse.headers["Set-Cookie"] == None)
-	#assert(loginResponse.url == "http://localhost/login.php")
-
 	# Test good username and bad password
 
-	loginResponse = login('admin@rit.edu','password')
+	loginResponse = login('admin@rit.edu','badpassword')
 
 	assert(loginResponse.status_code == 200)
 	assert("Set-Cookie" not in loginResponse.headers)
