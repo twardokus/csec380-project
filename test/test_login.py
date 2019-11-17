@@ -20,21 +20,18 @@ def test_login():
 	loginResponse = login('admin@rit.edu','password')
 
 	assert(loginResponse.status_code == 200)
-	assert("Set-Cookie" in loginResponse.headers)
 
 	# Test bad username and good password
 
 	loginResponse = login('notarealuser','badpassword')
 	
 	assert(loginResponse.status_code == 200)
-	assert("Set-Cookie" not in loginResponse.headers)
 		
 	# Test good username and bad password
 
 	loginResponse = login('admin@rit.edu','badpassword')
 
 	assert(loginResponse.status_code == 200)
-	assert("Set-Cookie" not in loginResponse.headers)
 
 
 def wait_for_docker_compose():
