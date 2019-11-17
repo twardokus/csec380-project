@@ -18,14 +18,13 @@ def test_login():
 	loginResponse = login('admin@rit.edu','password')
 	
 	assert(loginResponse.status_code == 200)
-	assert("Set-Cookie" in loginresponse.headers)
+	assert("Set-Cookie" in loginResponse.headers)
 
 	# Test bad username and good password
 
 	loginResponse = login('notarealuser','badpassword')
 	
 	assert(loginResponse.status_code == 200)
-	print(loginResponse.headers)
 	assert("Set-Cookie" not in loginResponse.headers)
 		
 	# Test good username and bad password
