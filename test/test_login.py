@@ -18,7 +18,7 @@ def test_login():
 	loginResponse = login('admin@rit.edu','password')
 	
 	assert(loginResponse.status_code == 200)
-	assert(loginResponse.url == "http://localhost/videos.php")
+	assert("Set-Cookie" in loginresponse.headers)
 
 	# Test bad username and good password
 
