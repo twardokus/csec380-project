@@ -17,9 +17,17 @@
                 //Go to secured page
                 header('Location: videos.php');
             }
+	    else {
+		$fail_count = $row['failed_login_count'] + 1;
+		$stmt = mysqli_prepare($sqlconn, "UPDATE users SET failed_login_count = ? WHERE email = ?");
+		mysqli_stmt_bind_param($stmt, 'is', $fail_count, $_POST['username']);
+		if(!$stmt->execute()){
+			die("Error executing prepared statement: " . mysqli_error($sqlconn));
+		}
+		session_destroy();
+	    }
         }
     }else{
-	
         die("Error - Getting results: " . mysqli_error($sqlconn));
     }
 
