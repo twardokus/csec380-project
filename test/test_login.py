@@ -14,7 +14,8 @@ def login(username, password):
 	return result
 
 def test_login():
-	
+	while("mysqli_connect" in login('notarealuser','badpassword').text):
+		time.sleep(1)
 	# Test valid credentials
 	
 	loginResponse = login('admin@rit.edu','password')
@@ -41,8 +42,14 @@ def test_login():
 
 
 def wait_for_docker_compose():
-	while("mysqli_connect" in login('notarealuser','badpassword').text):
-		time.sleep(1)
+	failures = 0
+	while failures < 10:
+		try:
+			home = requests.get("http://localhost", allow_redirects=True)
+			break
+		except:
+			failures += 1
+			time.sleep(30)	
 				
 
 def test_connection():
