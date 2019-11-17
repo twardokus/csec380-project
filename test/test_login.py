@@ -16,7 +16,10 @@ def test_login():
 	# Test valid credentials
 	
 	loginResponse = login('admin@rit.edu','password')
-	
+
+	print(loginResponse.status_code)
+	print(loginResponse.url)
+	print(loginResponse.headers)	
 	assert(loginResponse.status_code == 200)
 	assert("Set-Cookie" in loginResponse.headers)
 
