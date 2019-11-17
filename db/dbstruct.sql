@@ -15,17 +15,20 @@ CREATE TABLE `users` (
   `email` varchar(64) NOT NULL,
   `password` varchar(255) NOT NULL,
   `firstname` varchar(25) NOT NULL,
-  `lastname` varchar(25) NOT NULL
+  `lastname` varchar(25) NOT NULL,
+  `last_failed_login` DATETIME,
+  `failed_login_count` int(11) NOT NULL,
+  `last_successful_login` DATETIME
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `email`, `password`, `firstname`, `lastname`) VALUES
-(1, 'admin@rit.edu', md5('password'), 'Jon', 'Doe'),
-(2, 'nonadmin@rit.edu', md5('password'), 'neil', 'zimmerman'),
-(3, 'userone@rit.edu', md5('password'), 'Grant', 'Batchlor');
+INSERT INTO `users` (`user_id`, `email`, `password`, `firstname`, `lastname`, `last_failed_login`, `failed_login_count`, `last_successful_login`) VALUES
+(1, 'admin@rit.edu', md5('password'), 'Jon', 'Doe', '1900-01-01 00:00:00', 0, '1900-01-01 00:00:00'),
+(2, 'nonadmin@rit.edu', md5('password'), 'neil', 'zimmerman', '1900-01-01 00:00:00', 0, '1900-01-01 00:00:00'),
+(3, 'userone@rit.edu', md5('password'), 'Grant', 'Batchlor', '1900-01-01 00:00:00', 0, '1900-01-01 00:00:00');
 -- --------------------------------------------------------
 
 --
