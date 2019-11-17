@@ -41,14 +41,9 @@ def test_login():
 
 
 def wait_for_docker_compose():
-	failures = 0
-	while failures < 10:
-		try:
-			home = s.get("http://localhost", allow_redirects=True)
-			break
-		except:
-			failures += 1
-			time.sleep(30)	
+	while("mysqli_connect" in login('notarealuser','badpassword').text):
+		time.sleep(1)
+				
 
 def test_connection():
 	home = s.get("http://127.0.0.1:80", allow_redirects=True)
