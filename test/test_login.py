@@ -4,10 +4,12 @@ from bs4 import BeautifulSoup
 import requests
 import time
 
+s = requests.Session()
+
 def login(username, password):
 	url = "http://localhost/loginvalidate.php"	
 	validCreds = {'username': username,'password': password}
-	result = requests.post(url, validCreds, allow_redirects=True)
+	result = s.post(url, validCreds, allow_redirects=True)
 
 	return result
 
@@ -17,9 +19,6 @@ def test_login():
 	
 	loginResponse = login('admin@rit.edu','password')
 
-	print(loginResponse.status_code)
-	print(loginResponse.url)
-	print(loginResponse.headers)	
 	assert(loginResponse.status_code == 200)
 	assert("Set-Cookie" in loginResponse.headers)
 
@@ -42,14 +41,14 @@ def wait_for_docker_compose():
 	failures = 0
 	while failures < 10:
 		try:
-			home = requests.get("http://localhost", allow_redirects=True)
+			home = s.get("http://localhost", allow_redirects=True)
 			break
 		except:
 			failures += 1
 			time.sleep(30)	
 
 def test_connection():
-	home = requests.get("http://127.0.0.1:80", allow_redirects=True)
+	home = s.get("http://127.0.0.1:80", allow_redirects=True)
 	assert(home != None)
 
 wait_for_docker_compose()
