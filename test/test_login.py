@@ -20,21 +20,21 @@ def test_login():
 	loginResponse = login('admin@rit.edu','password')
 
 	assert(loginResponse.status_code == 200)
-	assert("(Cookies in use)" not in loginResponse.text)
+	assert("(Cookies in use)" not in loginResponse.text and '<meta http-equiv="Refresh" content="0" url="http://localhost/login.php" />' not in loginResponse.text)
 
 	# Test bad username and good password
 
 	loginResponse = login('notarealuser','badpassword')
 	
 	assert(loginResponse.status_code == 200)
-	assert("(Cookies in use)" in loginResponse.text)
+	assert("(Cookies in use)" in loginResponse.text or '<meta http-equiv="Refresh" content="0" url="http://localhost/login.php" />' in loginResponse.text)
 		
 	# Test good username and bad password
 
 	loginResponse = login('admin@rit.edu','badpassword')
 
 	assert(loginResponse.status_code == 200)
-	assert("(Cookies in use)" in loginResponse.text)
+	assert("(Cookies in use)" in loginResponse.text or '<meta http-equiv="Refresh" content="0" url="http://localhost/login.php" />' in loginResponse.text)
 
 
 def wait_for_docker_compose():
