@@ -22,9 +22,10 @@ def test_login():
 
 	# Test bad username and good password
 
-	loginReponse = login('notarealuser','badpassword')
+	loginResponse = login('notarealuser','badpassword')
 	
 	assert(loginResponse.status_code == 200)
+	print(loginResponse.headers)
 	assert("Set-Cookie" not in loginResponse.headers)
 		
 	# Test good username and bad password

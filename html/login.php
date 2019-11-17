@@ -1,7 +1,3 @@
-<?php
-	// Inialize session
-	session_start();
-?>
 <html>
 <head>
 	<title>Login</title>

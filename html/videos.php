@@ -28,9 +28,9 @@
                 $emailreturned = $sqlconn->query($getemail);
                 $theuploader = mysqli_fetch_assoc($emailreturned);
                 $uploaderEmail = $theuploader['email'];
-                echo "<article class=\"video\"><video width=\"320\" height=\"240\" controls><source src=\"/videos/". $value['ownerid'] ."/". $value['titlehash']."\" type=\"video/mp4\">Your browser does not support the video tag.</video><p>Uploaded by: ".$uploaderEmail."</p>";
+                echo "<article class=\"video\"><video width=\"320\" height=\"240\" controls><source src=\"/videos/". $value['ownerid'] ."/". $value['titlehash']."\" type=\"video/mp4\">Your browser does not support the video tag.</video><p>Uploaded by: ". mysqli_real_escape_string($sqlconn, $uploaderEmail)."</p>";
                 if($_SESSION['username'] == $uploaderEmail){
-                    echo "<form action=\"proc/deletevideo.php\" method=\"post\"><input type=\"submit\" name=\"deletevid\" value=\"Delete Video\" /></form>";
+                    echo "<form action=\"proc/deletevideo.php\" method=\"post\"><input type=\"hidden\" id=\"videoHash\" name=\"videoHash\" value=". $value['titlehash'] ."/><input type=\"submit\" name=\"deletevid\" value=\"Delete Video\" /></form>";
                 }
                 echo "</article>";
             }
