@@ -20,7 +20,7 @@ def test_login():
 	loginResponse = login('admin@rit.edu','password')
 
 	assert(loginResponse.status_code == 200)
-	assert("(Cookies in use)" in loginResponse.text)
+	assert("(Cookies in use)" not in loginResponse.text)
 
 	# Test bad username and good password
 
