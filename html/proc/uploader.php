@@ -53,7 +53,7 @@ if(isset($_SESSION['username'])){
                 throw new RuntimeException('Invalid file format.');
             }
 
-            $filename = sprintf('%s.%s', sha1(time()),$ext);
+            $filename = sprintf('%s.%s', sha1(microtime()),$ext);
             if(is_dir($path) == false){
                 mkdir($path);
             }
