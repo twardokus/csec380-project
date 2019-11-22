@@ -44,7 +44,7 @@ Execute test sequence
 """
 wait_for_docker_compose()
 test_connection()
-login()
+login("admin@rit.edu","password")
 
 
 
