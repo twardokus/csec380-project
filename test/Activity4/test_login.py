@@ -6,7 +6,9 @@ import time
 
 s = requests.Session()
 
-
+"""
+Log into the application
+"""
 def login(username, password):
     url = "http://localhost/loginvalidate.php"
     validCreds = {'username': username, 'password': password}
@@ -14,25 +16,9 @@ def login(username, password):
 
     return result
 
-
-def test_login():
-    while "mysqli_connect" in login('notarealuser', 'badpassword').text:
-        time.sleep(1)
-    # Test valid credentials
-
-    loginResponse = login('admin@rit.edu', 'password')
-
-    assert (loginResponse.status_code == 200)
-    print(loginResponse.text)
-    assert (
-            "(Cookies in use)" not in loginResponse.text and '<meta http-equiv="Refresh" content="0" '
-                                                             'url="http://localhost/login.php" />' not in
-            loginResponse.text)
-
-
-# Test bad username and good password
-
-
+"""
+Utility function to delay test execution until docker-compose has brought all container online.
+"""
 def wait_for_docker_compose():
     failures = 0
     while failures < 10:
@@ -43,12 +29,22 @@ def wait_for_docker_compose():
             failures += 1
             time.sleep(30)
 
-
+"""
+Test whether the web server is online
+"""
 def test_connection():
     home = s.get("http://127.0.0.1:80", allow_redirects=True)
     assert (home != None)
 
 
+
+
+"""
+Execute test sequence
+"""
 wait_for_docker_compose()
 test_connection()
-test_login()
+login()
+
+
+
