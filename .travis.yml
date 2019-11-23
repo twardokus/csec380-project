@@ -5,7 +5,6 @@ services:
     
 before_install:
     - docker-compose up &
-    - chmod +r -R /var/html
    
 install:
     - pip install -r ./test/requirements.txt
