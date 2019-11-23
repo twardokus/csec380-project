@@ -17,6 +17,19 @@ def login(username, password):
     return result
 
 """
+Test video upload via file
+"""
+def test_uploadvid():
+    login('admin@rit.edu','password')
+    url = 'http://localhost/proc/uploader.php'
+    params = {'vidtitle':'catz'}
+    f=open('html/videos/1/438ad3bf24fed937085ffa101ed06cdb23e30007.mp4')
+    result = s.post(url, params, files={'upfile':f})
+
+    print(result.text)
+    assert('File data uploaded to DB sucessfully.' in result.text)
+
+"""
 Utility function to delay test execution until docker-compose has brought all container online.
 """
 def wait_for_docker_compose():
@@ -37,6 +50,7 @@ def test_connection():
     assert (home != None)
 
 
+   
 
 
 """
