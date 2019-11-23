@@ -9,8 +9,5 @@ before_install:
 install:
     - pip install -r ./test/requirements.txt
     
-before_script:
-    - docker-compose run --user=root --entrypoint chown /var/www/html -R myuser:myuser .
-    
 script:
     pytest ./test
