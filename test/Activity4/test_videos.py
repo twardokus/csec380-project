@@ -25,11 +25,11 @@ def test_uploadvid():
     params = {'downloadurl':'https://people.rit.edu/ara1494/assets/movies/cloth_ball.mp4', 'vidtitle' : 'catz'}
 #     files = {'upload_file': open('html/videos/testvids/438ad3bf24fed937085ffa101ed06cdb23e30007.mp4','rb')}
     time.sleep(3)
-    url = 'http://localhost/videos.php'
+    urltwo = 'http://localhost/videos.php'
     result = s.post(url, params=params)
     assert('File' in result.text)
     time.sleep(5)
-    checkvids  = s.post(url)
+    checkvids  = s.post(urltwo)
     assert('catz' in checkvids.text)
 
 """
