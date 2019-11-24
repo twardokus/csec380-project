@@ -24,7 +24,8 @@ def test_ssrf():
     url = 'http://localhost/proc/uploader.php'
     params = {'downloadurl':'/etc/deluser.conf ', 'vidtitle' : 'catz'}
     result = s.post(url, params=params)
-    assert(html/videos/1/Array)
+    f=open('html/videos/1/Array','rb')
+    assert(f)
 
 
 
