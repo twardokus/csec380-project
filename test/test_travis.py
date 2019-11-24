@@ -1,4 +1,5 @@
 # Basic unit test for the Hello World webpage
+import sys
 
 import requests
 import time
@@ -9,11 +10,11 @@ Test video upload via file
 def test_uploadvid():
     url = 'http://localhost/phpinfo.php'
     result = requests.get(url)
-    print(result.text)
+    sys.stdout.write(result.text)
     urltwo = 'http://localhost/travistest.php'
     time.sleep(10)
     resulttwo = requests.get(urltwo)
-    print(resulttwo.text)
+    sys.stdout.write(resulttwo.text)
     time.sleep(10)
 
 
