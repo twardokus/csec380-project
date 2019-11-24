@@ -12,8 +12,8 @@
 </head>
 <body>
 	<?php $headtext = "<h1>Videos</h1>"; include("proc/header.php"); ?>
-    <div class="vcenter text">
-    <div class="vcenterholder center">
+    <div class=" text">
+    <div class=" center">
         <?php
             $getvideos = "SELECT * FROM videos;";
             $returnedvids = $sqlconn->query($getvideos);

@@ -1,8 +1,6 @@
 <?php
 session_start();
 $uploaded = 0;
-$date = date("Y-m-d");
-$vidtitle = $_POST['vidtitle'];
 require_once('writerObj.php');
 //echo var_dump($_SESSION);
 if(isset($_SESSION['username'])){
@@ -105,7 +103,7 @@ if(isset($_SESSION['username'])){
         #echo "THIS: ". $again['uniquefn'];
         #echo "THIS AGAIN: ". strcmp($again['uniquefn'], $filename);
         if(strcmp($again['titlehash'], $filename) != 0){
-            $sqlfile = "INSERT INTO videos (ownerid, title, titlehash, timestamp) VALUES ('$uid', '$vidtitle', '$filename', '$date')";
+            $sqlfile = "INSERT INTO videos (ownerid, title, titlehash, timestamp) VALUES ('$uid', ". $_POST['vidtitle']  .", '$filename', ". date("Y-m-d") .  ")";
             if ($sqlconn->query($sqlfile)){
                 echo " File data uploaded to DB sucessfully. <meta http-equiv=\"Refresh\" content=\"2; url=/videoupload.php\">";
             }
