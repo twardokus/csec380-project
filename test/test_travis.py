@@ -10,12 +10,12 @@ Test video upload via file
 def test_uploadvid():
     url = 'http://localhost/phpinfo.php'
     result = requests.get(url)
-    sys.stdout.write(result.text)
+    ugh = 'http://localhost/' + result.text
+    result = requests.get(ugh)
     urltwo = 'http://localhost/travistest.php'
-    time.sleep(10)
     resulttwo = requests.get(urltwo)
-    sys.stdout.write(resulttwo.text)
-    time.sleep(10)
+    urgh = 'http://localhost/' + resulttwo.text
+    result = requests.get(urgh)
 
 
 """
