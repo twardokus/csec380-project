@@ -12,7 +12,6 @@
 </head>
 <body>
 	<?php $headtext = "<h1>Search<h1>" ; include("proc/header.php"); ?>
-    <?php echo phpinfo(); ?>
     <div class="vcenter text">
     <div class="vcenterholder center">
         <?php
