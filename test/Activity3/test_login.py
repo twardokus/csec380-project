@@ -24,8 +24,7 @@ def test_login():
 
     assert (loginResponse.status_code == 200)
     print(loginResponse.text)
-    assert (
-                "(Cookies in use)" not in loginResponse.text and '<meta http-equiv="Refresh" content="0" url="http://localhost/login.php" />' not in loginResponse.text)
+    assert ("Bad credentials" not in loginResponse.text)
 
     # Test bad username and good password
 
@@ -33,8 +32,7 @@ def test_login():
 
     assert (loginResponse.status_code == 200)
     print(loginResponse.text)
-    assert (
-                "(Cookies in use)" in loginResponse.text or '<meta http-equiv="Refresh" content="0" url="http://localhost/login.php" />' in loginResponse.text)
+    assert ("Bad credentials" in loginResponse.text)
 
     # Test good username and bad password
 
@@ -42,8 +40,7 @@ def test_login():
 
     assert (loginResponse.status_code == 200)
     print(loginResponse.text)
-    assert (
-                "(Cookies in use)" in loginResponse.text or '<meta http-equiv="Refresh" content="0" url="http://localhost/login.php" />' in loginResponse.text)
+    assert ("Bad credentials" in loginResponse.text)
 
 
 def wait_for_docker_compose():
