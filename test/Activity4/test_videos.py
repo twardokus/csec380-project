@@ -83,6 +83,7 @@ Execute test sequence
 """
 wait_for_docker_compose()
 test_connection()
+login()
 test_uploadvid()
 src=test_accessvid()
 test_deletevid(src)
