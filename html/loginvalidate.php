@@ -22,4 +22,4 @@
     }
 
 ?>
-<meta http-equiv="Refresh" content="0" url="http://localhost/login.php" />
+<meta http-equiv="Refresh" content="0" url="http://localhost/videos.php" />
