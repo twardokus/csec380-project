@@ -8,6 +8,7 @@ before_install:
    
 install:
     - pip install -r ./test/requirements.txt
+    - docker run -it csec380project_server chown $USER:$USER /var/www/html
     
 script:
     pytest ./test
