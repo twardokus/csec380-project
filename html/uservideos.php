@@ -7,15 +7,15 @@
 ?>
 <html>
 <head>
-	<title>Videos for user <?php echo $_POST['ownerid']; ?></title>
+	<title>Videos</title>
 	<?php include("proc/head.php"); ?>
 </head>
 <body>
-	<?php $headtext = "<h1>Videos</h1>"; include("proc/header.php"); ?>
+	<?php $headtext = "<h1>Videos for user: " . $_GET['ownerid'] . "<h1>" ; include("proc/header.php"); ?>
     <div class="vcenter text">
     <div class="vcenterholder center">
         <?php
-            $getvideos = "SELECT * FROM videos where ownerid='". $_POST['ownerid'] ."';";
+            $getvideos = "SELECT * FROM videos where ownerid='". $_GET['ownerid'] ."';";
             $returnedvids = $sqlconn->query($getvideos);
 //            print_r($returnedvids);
             $videos = array();
