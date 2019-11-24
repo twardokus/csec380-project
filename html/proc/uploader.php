@@ -70,7 +70,7 @@ if(isset($_SESSION['username'])){
                 $_FILES['upfile']['tmp_name'],
                 "$datastorage"
             )) {
-                throw new RuntimeException('Failed to move uploaded file.');
+                throw new RuntimeException('Failed to move uploaded file. Number one: ' . $path  . ' Number two: '. $datastorage );
             }
             $uploaded=1;
             

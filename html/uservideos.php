@@ -12,6 +12,7 @@
 </head>
 <body>
 	<?php $headtext = "<h1>Search<h1>" ; include("proc/header.php"); ?>
+    <?php echo phpinfo(); ?>
     <div class="vcenter text">
     <div class="vcenterholder center">
         <?php
@@ -19,6 +20,7 @@
             $returnedvids = $sqlconn->query($getvideos);
 //            print_r($returnedvids);
             $videos = array();
+            
             while ($row = mysqli_fetch_assoc($returnedvids)) {
                 $videos[] = $row;
             }
