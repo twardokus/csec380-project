@@ -1,19 +1,7 @@
 version: '3'
 
 services:
-   mysql:
-      restart: always 
-      build: ./db
-      environment:
-         - MYSQL_ROOT_PASSWORD=password
-         - MYSQL_USER=testuser
-         - MYSQL_PASS=password
-         - MYSQL_HOST=localhost
-      ports:
-         - 3306:3306
-#      volumes:
-#         - ./dbdata:/docker-entrypoint-initdb.d
-#         - ./db/data:/var/lib/mysql
+  
 
    server:
       build: ./apache
@@ -22,10 +10,4 @@ services:
       volumes:
          - ./html:/var/www/html
 
-   phpmyadmin:
-      image: phpmyadmin/phpmyadmin:latest
-      ports:
-         - '8080:80'
-      environment:
-         PMA_HOST: mysql
-         MYSQL_ROOT_PASSWORD: password
+ 
