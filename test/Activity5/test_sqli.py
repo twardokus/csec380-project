@@ -26,7 +26,6 @@ def test_uploadvid():
     f=open('html/videos/testvids/438ad3bf24fed937085ffa101ed06cdb23e30007.mp4','rb')
     result = s.post(url, params, files={'upfile':f})
 
-    print(result.text)
     assert('File data uploaded to DB sucessfully.' in result.text)
 
 def uploadvid():
@@ -38,7 +37,6 @@ def uploadvid():
         f=open('html/videos/testvids/438ad3bf24fed937085ffa101ed06cdb23e30007.mp4','rb')
         result = s.post(url, params, files={'upfile':f})
 
-        print(result.text)
         assert('File data uploaded to DB sucessfully.' in result.text)
 
 """
@@ -51,22 +49,24 @@ def test_classicsqli():
     params = {'title':"test"}
     result = s.post(url,params)
 
-    print(result.text)
+    #print(result.text)
     assert('Epstein didnt kill himself' in result.text)
 
-"""
-Test video access
-"""
-def test_accessvid():
-    url = 'http://localhost/videos.php'
+def logout():
+    url = 'http://localhost/logout.php'
     result = s.get(url)
 
-    soup = BeautifulSoup(result.text, 'lxml')
-    i=soup.find_all('source')[0]['src'].split('/')[-1]+'\\'
-    print(i)
-    assert('Uploaded by: admin@rit.edu' in result.text)
-    return i
- 
+"""
+Blind SQLi test
+"""
+def test_blindsqli():
+    logout() 
+    r = login("admin@rit.edu' and 1 = 2 LIMIT 1 --']","badpass")
+    assert('Error' in r.text)
+    logout()
+    r = login("admin@rit.edu' and 1 = 1 LIMIT 1 --']","badpass")
+    assert('Bad credentials' not in r.text)
+
 
 """
 Utility function to delay test execution until docker-compose has brought all container online.
@@ -95,3 +95,4 @@ wait_for_docker_compose()
 test_connection()
 test_uploadvid()
 test_classicsqli()
+test_blindsqli()
