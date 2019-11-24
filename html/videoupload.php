@@ -16,7 +16,7 @@
 	<div class="vcenter text">
 		<div class="vcenterholder center">
 			<h1>Enter details of video</h1>
-			<form action="proc/uploader.php" method="post" enctype="multipart/form-data">
+			<form action="proc/uploader.php" method="post">
 				<p>Title: <input id="softfield" type="text" name="vidtitle" placeholder="catz" required>
                 <br>
                 <input type="textarea" id="description" name="description"
