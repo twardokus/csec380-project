@@ -1,8 +1,8 @@
 <?php
     session_start();
     require_once('proc/writerObj.php');
-    $stmt = mysqli_prepare($sqlconn, "SELECT user_id FROM users WHERE email='". $_POST['username'] ."' and password='".md5($_POST['password'])."';");
-    if(!$stmt->execute()){
+    $stmt = "SELECT user_id FROM users WHERE email='". $_POST['username'] ."' and password='".md5($_POST['password'])."';";
+    if(!mysqli_query($sqlconn,$stmt )){
         die("Error - Issue executing prepared statement: " . mysqli_error($sqlconn));
     }
     if($res = $stmt->get_result()){
