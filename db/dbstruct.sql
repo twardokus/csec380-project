@@ -37,7 +37,8 @@ CREATE TABLE `videos` (
   `title` varchar(64) NOT NULL,
   `titlehash` varchar(255) NOT NULL,
   `timestamp` varchar(25) NOT NULL,
-  `ownerid` int(11) NOT NULL
+  `ownerid` int(11) NOT NULL,
+  `description` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- INSERT INTO `videos` (`video_id`, `title`, `titlehash`, `timestamp`, `ownerid`) VALUES

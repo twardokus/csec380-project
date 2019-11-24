@@ -19,6 +19,8 @@
 			<form action="proc/uploader.php" method="post" enctype="multipart/form-data">
 				<p>Title: <input id="softfield" type="text" name="vidtitle" placeholder="catz" required>
                 <br>
+                <input type="textarea" id="description" name="description"
+                <br>
                 Select video file (mp4) to upload:
 				<input type="file" name="upfile" id="upfile">
                 OR Enter URL of video to download:
