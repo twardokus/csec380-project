@@ -12,6 +12,18 @@
 </head>
 <body>
 	<?php $headtext = "<h1>Videos</h1>"; include("proc/header.php"); ?>
+	<form method="post">
+		<input id="title" type="text" name="title" placeholder="Enter your search here!">
+		<input id="submit" type="submit" value="Search">
+	</form>
+	<?php
+		$vulnerable = "SELECT * FROM videos WHERE title='". $_POST["title"] ."';";
+		$result = mysqli_query($sqlconn,$vulnerable);
+		echo "<p>" . $result->num_rows . "</p>";
+		while ($row = mysqli_fetch_assoc($result)) {
+			echo "<p>" . $row['title'] ."</p><br />";
+		}
+	?>
     <div class=" text">
     <div class=" center">
         <?php
