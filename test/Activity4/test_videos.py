@@ -22,11 +22,12 @@ Test video upload via file
 def test_uploadvid():
     login('admin@rit.edu','password')
     url = 'http://localhost/proc/uploader.php'
-    params = {'downloadurl':'https%3A%2F%2Fpeople.rit.edu%2Fara1494%2Fassets%2Fmovies%2Fcloth_ball.mp4', 'vidtitle' : 'catz'}
+    params = {'downloadurl':'https://people.rit.edu/ara1494/assets/movies/cloth_ball.mp4', 'vidtitle' : 'catz'}
 #     files = {'upload_file': open('html/videos/testvids/438ad3bf24fed937085ffa101ed06cdb23e30007.mp4','rb')}
     time.sleep(3)
     url = 'http://localhost/videos.php'
     result = s.post(url, params=params)
+    assert('File' in result.text)
     time.sleep(5)
     checkvids  = s.post(url)
     assert('catz' in checkvids.text)
