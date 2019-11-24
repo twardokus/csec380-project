@@ -23,7 +23,7 @@ def test_uploadvid():
     login('admin@rit.edu','password')
     url = 'http://localhost/proc/uploader.php'
     params = {'vidtitle':'catz'}
-    f=open('../../html/videos/testvids/438ad3bf24fed937085ffa101ed06cdb23e30007.mp4','rb')
+    f=open('html/videos/testvids/438ad3bf24fed937085ffa101ed06cdb23e30007.mp4','rb')
     result = s.post(url, params, files={'upfile':f})
 
     print(result.text)
