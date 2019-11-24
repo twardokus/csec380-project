@@ -103,7 +103,7 @@ if(isset($_SESSION['username'])){
         #echo "THIS: ". $again['uniquefn'];
         #echo "THIS AGAIN: ". strcmp($again['uniquefn'], $filename);
         if(strcmp($again['titlehash'], $filename) != 0){
-            $sqlfile = "INSERT INTO videos (ownerid, title, titlehash, timestamp) VALUES ('$uid', ". $_POST['vidtitle']  .", '$filename', ". date("Y-m-d") .  ")";
+            $sqlfile = "INSERT INTO videos (ownerid, title, titlehash, timestamp) VALUES ('$uid', '". $_POST['vidtitle']  ."', '$filename', ". date("Y-m-d") .  ")";
             if ($sqlconn->query($sqlfile)){
                 echo " File data uploaded to DB sucessfully. <meta http-equiv=\"Refresh\" content=\"2; url=/videoupload.php\">";
             }
