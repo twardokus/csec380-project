@@ -83,7 +83,6 @@ Execute test sequence
 """
 wait_for_docker_compose()
 test_connection()
-login("admin@rit.edu","password")
 test_uploadvid()
 src=test_accessvid()
 test_deletevid(src)
