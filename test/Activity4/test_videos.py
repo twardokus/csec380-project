@@ -37,22 +37,28 @@ def test_accessvid():
     result = s.get(url)
 
     soup = BeautifulSoup(result.text, 'lxml')
-    src=soup.find_all('source')[0]['src'].split('/')[-1]+'\\'
-    print(src)
+    i=soup.find_all('source')[0]['src'].split('/')[-1]+'\\'
+    print(i)
     assert('Uploaded by: admin@rit.edu' in result.text)
-    return src
+    return i
 
 """
-Test video deletion
+video deletion
 """
-def test_deletevid(src):
+def deletevid(i):
     url = 'http://localhost/proc/deletevideo.php'
-    params = {'videoHash':src}
+    params = {'videoHash':i}
     result = s.post(url, params)
 
     print(result.text)
     assert('File Deleted'in result.text)
 
+"""
+Test vid deletion
+"""
+def test_deletevid():
+    i=test_accessvid()
+    deletevid(i)
 
 """
 Utility function to delay test execution until docker-compose has brought all container online.
@@ -74,15 +80,11 @@ def test_connection():
     home = s.get("http://127.0.0.1:80", allow_redirects=True)
     assert (home != None)
 
-
-   
-
-
 """
 Execute test sequence
 """
 wait_for_docker_compose()
 test_connection()
 test_uploadvid()
-src=test_accessvid()
-test_deletevid(src)
+test_deletevid()
+
