@@ -23,11 +23,36 @@ def test_uploadvid():
     login('admin@rit.edu','password')
     url = 'http://localhost/proc/uploader.php'
     params = {'vidtitle':'catz'}
-    f=open('html/videos/testvids/438ad3bf24fed937085ffa101ed06cdb23e30007.mp4','rb')
+    f=open('../../html/videos/testvids/438ad3bf24fed937085ffa101ed06cdb23e30007.mp4','rb')
     result = s.post(url, params, files={'upfile':f})
 
     print(result.text)
     assert('File data uploaded to DB sucessfully.' in result.text)
+
+"""
+Test video access
+"""
+def test_accessvid():
+    url = 'http://localhost/videos.php'
+    result = s.get(url)
+
+    soup = BeautifulSoup(result.text, 'lxml')
+    src=soup.find_all('source')[0]['src'].split('/')[-1]+'\\'
+    print(src)
+    assert('Uploaded by: admin@rit.edu' in result.text)
+    return src
+
+"""
+Test video deletion
+"""
+def test_deletevid(src):
+    url = 'http://localhost/proc/deletevideo.php'
+    params = {'videoHash':src}
+    result = s.post(url, params)
+
+    print(result.text)
+    assert('File Deleted'in result.text)
+
 
 """
 Utility function to delay test execution until docker-compose has brought all container online.
@@ -58,7 +83,6 @@ Execute test sequence
 """
 wait_for_docker_compose()
 test_connection()
-login("admin@rit.edu","password")
-
-
-
+test_uploadvid()
+src=test_accessvid()
+test_deletevid(src)
