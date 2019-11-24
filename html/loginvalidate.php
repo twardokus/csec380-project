@@ -6,8 +6,7 @@
     if(!$output){
         die("Error - Issue executing prepared statement: " . mysqli_error($sqlconn));
     }
-    
-    if($res = $output->get_result()){
+    if($res = $output){
         $row = $res->fetch_assoc();
         if($row){
             session_destroy();
