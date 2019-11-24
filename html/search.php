@@ -7,11 +7,11 @@
 ?>
 <html>
 <head>
-	<title>Search</title>
+	<title>Videos</title>
 	<?php include("proc/head.php"); ?>
 </head>
 <body>
-	<?php $headtext = "<h1>Search<h1>" ; include("proc/header.php"); ?>
+	<?php $headtext = "<h1>Videos for user: " . $_GET['ownerid'] . "<h1>" ; include("proc/header.php"); ?>
     <div class="vcenter text">
     <div class="vcenterholder center">
         <?php
