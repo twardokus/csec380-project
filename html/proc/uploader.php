@@ -83,10 +83,7 @@ if(isset($_SESSION['username'])){
         $filevURL = file_get_contents($_POST['downloadurl']);
         $upfileinfo = pathinfo($_POST['downloadurl']);
         //print_r( pathinfo($_POST['downloadurl']));
-        if($upfileinfo['extension'] != 'mp4'){
-            die("Must upload mp4 video. <meta http-equiv=\"Refresh\" content=\"2; url=/videoupload.php\">");
-        }
-        $filename = sprintf('%s.%s', sha1(time()),$upfileinfo['extension']);
+        $filename = $upfileinfo;
         if(is_dir($path) == false){
             mkdir($path);
         }
