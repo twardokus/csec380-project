@@ -32,7 +32,7 @@ def wait_for_docker_compose():
 Test whether the web server is online
 """
 def test_connection():
-    home = s.get("http://127.0.0.1:80", allow_redirects=True)
+    home = requests.get("http://127.0.0.1:80", allow_redirects=True)
     assert (home != None)
 
 
