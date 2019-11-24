@@ -8,10 +8,10 @@ import time
 Test video upload via file
 """
 def test_uploadvid():
-    url = 'http://localhost/phpinfo.php'
-    result = requests.get(url)
-    ugh = 'http://localhost/' + result.text
-    result = requests.get(ugh)
+#     url = 'http://localhost/phpinfo.php'
+#     result = requests.get(url)
+#     ugh = 'http://localhost/' + result.text
+#     result = requests.get(ugh)
     urltwo = 'http://localhost/travistest.php'
     resulttwo = requests.get(urltwo)
     urgh = 'http://localhost/' + resulttwo.text
