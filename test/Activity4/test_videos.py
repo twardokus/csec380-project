@@ -25,9 +25,10 @@ def test_uploadvid():
     params = {'vidtitle':'catz'}
     files = {'upload_file': open('html/videos/testvids/438ad3bf24fed937085ffa101ed06cdb23e30007.mp4','rb')}
     time.sleep(3)
+    url = 'http://localhost/videos.php'
     result = s.post(url, data=params, files=files)
-    print(result.text)
-    assert('File data uploaded to DB sucessfully.' in result.text)
+    checkvids  = s.post(url, data=params, files=files)
+    assert('catz' in checkvids.text)
 
 """
 Test video access
