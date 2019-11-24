@@ -17,9 +17,9 @@
 		<input id="submit" type="submit" value="Search">
 	</form>
 	<?php
-		$vulnerable = "SELECT * FROM videos WHERE title='". $_POST["title"] ."';";
+		$vulnerable = "SELECT title FROM videos WHERE title='". $_POST["title"] ."';";
 		$result = mysqli_query($sqlconn,$vulnerable);
-		echo "<p>" . $result->num_rows . "</p>";
+//		echo "<p>" . $result->num_rows . "</p>";
 		while ($row = mysqli_fetch_assoc($result)) {
 			echo "<p>" . $row['title'] ."</p><br />";
 		}
