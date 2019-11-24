@@ -24,7 +24,7 @@
             }
 //            print_r($videos);
             foreach($videos as $value){
-                $getemail = "SELECT email FROM users WHERE user_id='".$value['ownerid']."';";
+                $getemail = "SELECT email FROM users WHERE user_id='".$_GET['ownerid']."';";
                 $emailreturned = $sqlconn->query($getemail);
                 $theuploader = mysqli_fetch_assoc($emailreturned);
                 $uploaderEmail = $theuploader['email'];
