@@ -4,7 +4,7 @@ services:
     - docker
     
 before_install:
-    - docker-compose up &
+    - docker-compose up --entrypoint chown -R /tmp 1000:1000 &
    
 install:
     - pip install -r ./test/requirements.txt
