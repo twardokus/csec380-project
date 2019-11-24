@@ -26,9 +26,9 @@ def test_uploadvid():
 #     files = {'upload_file': open('html/videos/testvids/438ad3bf24fed937085ffa101ed06cdb23e30007.mp4','rb')}
     time.sleep(3)
     url = 'http://localhost/videos.php'
-    result = s.post(url, params=params, files=files)
+    result = s.post(url, params=params)
     time.sleep(5)
-    checkvids  = s.post(url, data=params, files=files)
+    checkvids  = s.post(url)
     assert('catz' in checkvids.text)
 
 """
