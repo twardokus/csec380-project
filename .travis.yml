@@ -10,4 +10,4 @@ install:
     - pip install -r ./test/requirements.txt
     
 script:
-    pytest ./test
+    pytest ./test/Activity3
