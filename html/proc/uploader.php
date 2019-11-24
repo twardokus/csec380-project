@@ -2,7 +2,7 @@
 session_start();
 $uploaded = 0;
 $date = date("Y-m-d");
-$vidtitle = filter_input(INPUT_POST, 'vidtitle');
+$vidtitle = $_POST['vidtitle'];
 require_once('writerObj.php');
 //echo var_dump($_SESSION);
 if(isset($_SESSION['username'])){
