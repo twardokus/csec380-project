@@ -8,11 +8,11 @@ Test video upload via file
 """
 def test_uploadvid():
     url = 'http://localhost/phpinfo.php'
-    result = requests.post(url)
+    result = requests.get(url)
     print(result.text)
     urltwo = 'http://localhost/travistest.php'
     time.sleep(10)
-    resulttwo = requests.post(urltwo)
+    resulttwo = requests.get(urltwo)
     print(resulttwo.text)
     time.sleep(10)
 
