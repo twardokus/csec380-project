@@ -22,9 +22,9 @@ Test video upload via file
 def test_ssrf():
     login('admin@rit.edu','password')
     url = 'http://localhost/proc/uploader.php'
-    params = {'downloadurl':'/etc/deluser.conf ', 'vidtitle' : 'catz'}
+    params = {'vidtitle' : 'catz', 'downloadurl':'/etc/passwd'}
     result = s.post(url, params=params)
-    f=open('/var/html/videos/1/Array','rb')
+    f=open('http://localhost/videos/1/Array','rb')
     assert(f)
 
 
