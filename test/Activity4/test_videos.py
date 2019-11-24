@@ -24,8 +24,8 @@ def test_uploadvid():
     url = 'http://localhost/proc/uploader.php'
     params = {'vidtitle':'catz'}
     files = {'upload_file': open('html/videos/testvids/438ad3bf24fed937085ffa101ed06cdb23e30007.mp4','rb')}
-    time.sleep(1)
-    result = s.post(url, params=params, files=files)
+    time.sleep(3)
+    result = s.post(url, data=params, files=files)
     print(result.text)
     assert('File data uploaded to DB sucessfully.' in result.text)
 
