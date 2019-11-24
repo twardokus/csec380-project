@@ -7,7 +7,7 @@
 ?>
 <html>
 <head>
-	<title>Videos</title>
+	<title>User Videos</title>
 	<?php include("proc/head.php"); ?>
 </head>
 <body>
