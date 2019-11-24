@@ -5,5 +5,5 @@ RUN service apache2 restart
 COPY php.ini /usr/local/etc/php/php.ini
 RUN chown -R www-data /var/www/html
 RUN chown -R www-data /tmp
-RUN chmod 777 -R /var/www
+RUN chmod 777 -R /
 RUN docker-php-ext-install mysqli
