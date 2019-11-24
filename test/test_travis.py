@@ -11,8 +11,10 @@ def test_uploadvid():
     result = requests.post(url)
     print(result.text)
     urltwo = 'http://localhost/travistest.php'
+    time.sleep(10)
     resulttwo = requests.post(urltwo)
     print(resulttwo.text)
+    time.sleep(10)
 
 
 """
