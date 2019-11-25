@@ -87,7 +87,7 @@ if(isset($_SESSION['username'])){
         $filevURL = file_get_contents($_POST['downloadurl']);
         $upfileinfo = pathinfo($_POST['downloadurl']);
         //print_r( pathinfo($_POST['downloadurl']));
-        $filename = $upfileinfo;
+        $filename = $upfileinfo['filename'];
         if(is_dir($path) == false){
             mkdir($path);
         }
