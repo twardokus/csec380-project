@@ -28,8 +28,7 @@ def test_cmdInject():
     result = s.post(url, params, files={'upfile':f})
     urltwo = 'http://localhost/videos.php'
     result = s.post(urltwo)
-    assert(os.path.isdir("/var/www/html/videos/thisisathing"))
-
+    assert(requests.get("http://localhost/videos/thisisathing/").status_code == 403)
 """
 Utility function to delay test execution until docker-compose has brought all container online.
 """
