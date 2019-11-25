@@ -19,36 +19,15 @@ def login(username, password):
 """
 Test video upload via file
 """
-def test_uploadvid():
+def test_ssrf():
     login('admin@rit.edu','password')
     url = 'http://localhost/proc/uploader.php'
-    params = {'vidtitle':'catz'}
-    f=open('html/videos/testvids/438ad3bf24fed937085ffa101ed06cdb23e30007.mp4','rb')
-    result = s.post(url, params, files={'upfile':f})
+    params = {'downloadurl':'/etc/deluser.conf ', 'vidtitle' : 'catz'}
+    result = s.post(url, params=params)
+    Urltwo= 'http://localhost/videos/1/Array'
+    Again = s.post(Urltwo)
+    assert(Again.text)
 
-    assert('File data uploaded to DB sucessfully.' in result.text)
-
-def uploadvid():
-    url = 'http://localhost/proc/uploader.php'
-    titles = ['red fish', 'blue fish', 'Epstein didnt kill himself']
-    
-    for t in titles:
-        params = {'vidtitle':t}
-        f=open('html/videos/testvids/438ad3bf24fed937085ffa101ed06cdb23e30007.mp4','rb')
-        result = s.post(url, params, files={'upfile':f})
-
-        assert('File data uploaded to DB sucessfully.' in result.text)
-
-def logout():
-    url = 'http://localhost/logout.php'
-    result = s.get(url)
-
-def test_ssrf():
-    url = 'http://localhost/proc/uploader.php'
-    params = {'vidtitle':'hacky','downloadurl':'file:///etc/passwd'}
-    result = s.post(url, params)
-    result = s.get('http://localhost/videos.php')
-    assert('hacky' in result.text and 'videos/1/passwd' in result.text)
 
 
 """
@@ -76,5 +55,5 @@ Execute test sequence
 """
 wait_for_docker_compose()
 test_connection()
-test_uploadvid()
 test_ssrf()
+

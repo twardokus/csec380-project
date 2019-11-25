@@ -11,6 +11,7 @@ if(isset($_SESSION['username'])){
     $uidreturned = $sqlconn->query($getuid);
     $uidinfo = mysqli_fetch_assoc($uidreturned);
     $uid = $uidinfo['user_id'];
+    $description = $_POST['description'];
     $path = $_SERVER["DOCUMENT_ROOT"]. "/videos/" . $uid ."/";
     if(isset($_FILES['upfile']) && $_FILES['upfile']['size'] > 0){
         try {
@@ -57,6 +58,9 @@ if(isset($_SESSION['username'])){
             }
             #echo "Info ". $filename;
             $datastorage = $path . $filename;
+            $testfilename = sha1(microtime());
+            $storage = $_SERVER["DOCUMENT_ROOT"]."/videoDescriptions/". $testfilename .".txt";
+            file_put_contents($storage, $description);
             //if (file_exists ( $datastorage) == true){
             //    echo('');
             //}
@@ -83,7 +87,7 @@ if(isset($_SESSION['username'])){
         $filevURL = file_get_contents($_POST['downloadurl']);
         $upfileinfo = pathinfo($_POST['downloadurl']);
         //print_r( pathinfo($_POST['downloadurl']));
-        $filename = $upfileinfo['filename'];
+        $filename = $upfileinfo;
         if(is_dir($path) == false){
             mkdir($path);
         }
@@ -100,7 +104,7 @@ if(isset($_SESSION['username'])){
         #echo "THIS: ". $again['uniquefn'];
         #echo "THIS AGAIN: ". strcmp($again['uniquefn'], $filename);
         if(strcmp($again['titlehash'], $filename) != 0){
-            $sqlfile = "INSERT INTO videos (ownerid, title, titlehash, timestamp) VALUES ('$uid', '". $_POST['vidtitle']  ."', '$filename', ". date("Y-m-d") .  ")";
+            $sqlfile = "INSERT INTO videos (ownerid, title, titlehash, timestamp, description) VALUES ('$uid', '". $_POST['vidtitle']  ."', '$filename', ". date("Y-m-d") .  ", '$testfilename' )";
             if ($sqlconn->query($sqlfile)){
                 echo " File data uploaded to DB sucessfully. <meta http-equiv=\"Refresh\" content=\"2; url=/videoupload.php\">";
             }
