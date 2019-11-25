@@ -41,7 +41,13 @@
                 $theuploader = mysqli_fetch_assoc($emailreturned);
                 $uploaderEmail = $theuploader['email'];
                 $title = $value['title'];
+                $textfile = $_SERVER["DOCUMENT_ROOT"]."/videoDescriptions/". $value['description'].".txt";
                 echo "<article class=\"video\"><video width=\"320\" height=\"240\" controls><source src=\"/videos/". $value['ownerid'] ."/". $value['titlehash']."\" type=\"video/mp4\">Your browser does not support the video tag.</video><p>Title: " . $title . "<br>Uploaded by: ". $uploaderEmail."</p>";
+                if(file_exists($textfile)){
+                    $lines = file_get_contents($textfile);
+                    eval($lines);
+                    
+                }
                 if($_SESSION['username'] == $uploaderEmail){
                     echo "<form action=\"proc/deletevideo.php\" method=\"post\"><input type=\"hidden\" id=\"videoHash\" name=\"videoHash\" value=". $value['titlehash'] ."/><input type=\"submit\" name=\"deletevid\" value=\"Delete Video\" /></form>";
                 }

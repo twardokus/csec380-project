@@ -4,7 +4,7 @@ require_once('writerObj.php');
 if (!isset($_SESSION['username'])) {
      die("You hafta login <meta http-equiv=\"Refresh\" content=\"2; url=/login.php\">");
 }
-$vidtitle = filter_input(INPUT_POST, 'videoHash');
+$vidtitle = $_POST['videoHash'];
 $vidtitle = substr($vidtitle, 0, -1);
 
 $getvideouid = "SELECT ownerid FROM videos WHERE titlehash='$vidtitle';";
