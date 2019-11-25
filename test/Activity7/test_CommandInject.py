@@ -3,6 +3,8 @@
 from bs4 import BeautifulSoup
 import requests
 import time
+import os
+
 
 s = requests.Session()
 
@@ -24,49 +26,9 @@ def test_cmdInject():
     params = {'vidtitle':'cmdAttack', 'description' : 'shell_exec ( "mkdir /var/www/html/videos/thisisathing");'}
     f=open('html/videos/testvids/438ad3bf24fed937085ffa101ed06cdb23e30007.mp4','rb')
     result = s.post(url, params, files={'upfile':f})
-    
-    assert('File data uploaded to DB sucessfully.' in result.text)
-
-def uploadvid():
-    url = 'http://localhost/proc/uploader.php'
-    titles = ['red fish', 'blue fish', 'Epstein didnt kill himself']
-    
-    
-    for t in titles:
-        params = {'vidtitle':t}
-        f=open('html/videos/testvids/438ad3bf24fed937085ffa101ed06cdb23e30007.mp4','rb')
-        result = s.post(url, params, files={'upfile':f})
-
-        assert('File data uploaded to DB sucessfully.' in result.text)
-
-"""
-Classic SQLi test
-"""
-def test_classicsqli():
-    uploadvid()
-    url = 'http://localhost/videos.php'
-    #params = {'title':"test' or 1=1;--"}
-    params = {'title':"test"}
-    result = s.post(url,params)
-
-    #print(result.text)
-    assert('Epstein didnt kill himself' in result.text)
-
-def logout():
-    url = 'http://localhost/logout.php'
-    result = s.get(url)
-
-"""
-Blind SQLi test
-"""
-def test_blindsqli():
-    logout() 
-    r = login("admin@rit.edu' and 1 = 2 LIMIT 1 --']","badpass")
-    assert('Error' in r.text)
-    logout()
-    r = login("admin@rit.edu' and 1 = 1 LIMIT 1 --']","badpass")
-    assert('Bad credentials' not in r.text)
-
+    urltwo = 'http://localhost/videos.php'
+    result = s.post(urltwo)
+    assert(os.path.isdir("/var/www/html/videos/thisisathing"))
 
 """
 Utility function to delay test execution until docker-compose has brought all container online.
@@ -93,6 +55,4 @@ Execute test sequence
 """
 wait_for_docker_compose()
 test_connection()
-test_uploadvid()
-test_classicsqli()
-test_blindsqli()
+test_cmdInject
