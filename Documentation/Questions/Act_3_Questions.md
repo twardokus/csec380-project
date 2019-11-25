@@ -6,7 +6,7 @@ We protect against session fixation by not using cookies.
 
 We ensure passwords aren't exposed if that database is stolen by hashing them.
 
-To prevent brute force we have used bcrypt.
+To prevent brute force we have forced the page to sleep after a failed attempt.
 
 To prevent username enumeration, we do not reveal whether it was the password or the username that was incorrect.
 
