@@ -1,6 +1,7 @@
 <?php
     session_start();
     require_once('proc/writerObj.php');
+    sleep(3);
     $stmt = "SELECT user_id FROM users WHERE email='". $_POST['username'] ."' and password='".md5($_POST['password'])."';";
     $output = mysqli_query($sqlconn,$stmt);
     if(!$output){
