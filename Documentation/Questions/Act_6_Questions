@@ -1,0 +1,3 @@
+to mitigate this specific issue, I would diable potentially dangerous schemas such as 'file://', 'ftp://', etc. Another mitigation startegy would be to whitelist DNS names or IPs.
+
+We used the 'file://' schema to get the taret to access files on it's own system when accessing a url to upload a video. The core difference is that functionality was abused rather than just used in a different way.
